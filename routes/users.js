@@ -43,7 +43,6 @@ router.get('/allUsers',async(ctx)=>{
 router.post('/register',async(ctx)=>{
   const user = ctx.request.body;
   Users.create(user);
-  console.log(user);
   result.success(ctx);
 });
 
