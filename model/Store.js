@@ -1,32 +1,34 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const uuid = require('node-uuid');
-class User extends Model {}
-User.init({
+class Store extends Model {}
+Store.init({
     id : {
         type : Sequelize.STRING(100),
         primaryKey: true,
         defaultValue : uuid.v1()
     },
-    sex : {
-        type : Sequelize.STRING(1),
-        defaultValue : '0'
+    storeName : {
+        type : Sequelize.STRING(10),
+        allowNull : false
     },
-    username: {
-        type: Sequelize.STRING(100),
+    log: {
+        type: Sequelize.STRING(20),
+        allowNull : false
     },
-    password: {
-        type: Sequelize.STRING(100),
+    lat: {
+        type : Sequelize.STRING(20),
+        allowNull : false
     }
 },{
     sequelize,
     freezeTableName: true,
     timestamps: true,
     paranoid: true,
-    modelName : 'user'
+    modelName : 'store'
 });
 
 //创建表，默认是false，true则是删除原有表，再创建
-User.sync();
+Store.sync();
 
-module.exports = User;
+module.exports = Store;

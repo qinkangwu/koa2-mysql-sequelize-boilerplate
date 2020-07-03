@@ -63,22 +63,6 @@ app.use(video.routes(), video.allowedMethods());
 // error-handling
 app.on('error', (err, ctx) => {
   systemLogger.error(err);
-  fetch('https://oapi.dingtalk.com/robot/send?access_token=c01891dcf2339887cbd640ad59940c9d2dafd249b6dc18fc0f98aa9de0b241ea', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      "msgtype": "text",
-      "text": {"content": '$waring --- ' + err},
-      "at": {
-        "atMobiles": [
-            "18602182076", 
-        ], 
-        "isAtAll": false
-      }
-    })
-  });
 });
 
 module.exports = app;
