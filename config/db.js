@@ -2,6 +2,10 @@ const Sequelize = require("sequelize");
 const conf = require('./conf');
 const isDev = process.env.npm_lifecycle_event === 'dev';
 const dbConf = isDev && conf.devDb || conf.proDb;
+const cls = require('continuation-local-storage');
+const namespace = cls.createNamespace('qkw');
+
+Sequelize.useCLS(namespace);
 
 const sequelize = new Sequelize(dbConf.database, dbConf.username, dbConf.password, {
     // the sql dialect of the database
@@ -46,7 +50,8 @@ const sequelize = new Sequelize(dbConf.database, dbConf.username, dbConf.passwor
       dialectOptions: {
         collate: 'utf8_general_ci'
       },
-      timestamps: true
+      timestamps: true,
+      indexes : []
     },
   
     // similar for sync: you can define this to always force sync for models

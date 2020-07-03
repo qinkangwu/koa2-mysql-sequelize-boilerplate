@@ -17,7 +17,7 @@ const User = sequelize.define('users', {
     password: Sequelize.STRING(100),
 },
 {
-	freezeTableName: false,
+	freezeTableName: true,
     timestamps: true,
     paranoid: true
 });

@@ -1,15 +1,15 @@
 module.exports = {
     devDb : {
-        database : 'koa2proDB',
+        database : 'qkw',
         username : 'root',
-        password : 'qkw',
+        password : 'qkw520ztt',
         host : 'localhost',
         port : 3306
     },
     proDb : {
-        database : 'koa2proDB',
+        database : 'qkw',
         username : 'root',
-        password : 'qkw',
+        password : 'qkw520ztt',
         host : 'localhost',
         port : 3306
     },
