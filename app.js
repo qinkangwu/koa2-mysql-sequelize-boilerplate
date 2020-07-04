@@ -9,6 +9,7 @@ const conf = require('./config/conf')
 const index = require('./routes/index');
 const users = require('./routes/users');
 const video = require('./routes/video');
+const store = require('./routes/store');
 const cors = require('koa2-cors');
 
 const KoaBody = require('koa-body');
@@ -59,6 +60,7 @@ app
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
 app.use(video.routes(), video.allowedMethods());
+app.use(store.routes(), store.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {

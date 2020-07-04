@@ -1,12 +1,11 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
-const uuid = require('node-uuid');
 class Store extends Model {}
 Store.init({
     id : {
         type : Sequelize.STRING(100),
         primaryKey: true,
-        defaultValue : uuid.v1()
+        allowNull : false
     },
     storeName : {
         type : Sequelize.STRING(10),

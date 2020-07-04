@@ -6,7 +6,7 @@ User.init({
     id : {
         type : Sequelize.STRING(100),
         primaryKey: true,
-        defaultValue : uuid.v1()
+        allowNull : false
     },
     sex : {
         type : Sequelize.STRING(1),

@@ -5,16 +5,25 @@ const util = require('util')
 const verify = util.promisify(jwt.verify) // 解密
 const conf = require('../config/conf');
 const result = require('../result');
+const uuid = require('node-uuid');
 
 let Users = model.User;
 router.prefix('/users')
 
+router.post('/register',async(ctx)=>{
+  const user = ctx.request.body;
+  user.id = uuid.v1();
+  Users.create(user);
+  result.success(ctx);
+});
+
 router.post('/login', async (ctx, next)=> {
   const user = ctx.request.body;
   let userToken = {
-    name: user.username
+    username: user.username,
+    password : user.password
   };
-  const token = jwt.sign(userToken, conf.jwtSecret, {expiresIn: '1h'})  //token签名 有效期为1小时
+  const token = jwt.sign(userToken, conf.jwtSecret, {expiresIn: '1h' , algorithm : 'HS256'})  //token签名 有效期为1小时
   result.success(ctx,{
     token
   });
@@ -26,7 +35,8 @@ router.get('/userInfo', async (ctx) => {
   if (token) {
     payload = await verify(token.split(' ')[1], conf.jwtSecret)  // // 解密，获取payload
     result.success(ctx,{
-      username : payload.name
+      username : payload.username,
+      id : payload.id
     });
   } else {
     result.error(ctx,{
@@ -40,10 +50,6 @@ router.get('/allUsers',async(ctx)=>{
   result.success(ctx,allUsers);
 });
 
-router.post('/register',async(ctx)=>{
-  const user = ctx.request.body;
-  Users.create(user);
-  result.success(ctx);
-});
+
 
 module.exports = router
