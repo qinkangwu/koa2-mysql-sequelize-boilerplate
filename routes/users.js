@@ -6,6 +6,7 @@ const verify = util.promisify(jwt.verify) // 解密
 const conf = require('../config/conf');
 const result = require('../result');
 const uuid = require('node-uuid');
+const redis = require('../utils/redis');
 
 let Users = model.User;
 router.prefix('/users')
@@ -13,6 +14,8 @@ router.prefix('/users')
 router.post('/register',async(ctx)=>{
   const user = ctx.request.body;
   user.id = uuid.v1();
+  const res = await redis.hmset(user.id,"id",user.id,"username",user.username,"password",user.password);
+  console.log(res,'redis res +++++++++++++++');
   Users.create(user);
   result.success(ctx);
 });

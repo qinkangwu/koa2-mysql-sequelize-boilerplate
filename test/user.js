@@ -12,7 +12,7 @@ describe('测试user接口',async ()=>{
   const self = this;
 
   // 为每个单元测试初始化数据
-  beforeEach((done)=> {
+  before((done)=> {
     co(function* () {
       //每次执行it之前都会执行一遍这里
       self.user1 = yield Users.create({id : uuid.v1(),username : 'test',password:'123456'});
@@ -23,6 +23,11 @@ describe('测试user接口',async ()=>{
       done();
     })
   });
+
+  after((done)=>{
+    process.exit();
+  })
+  
 
   it('register接口测试',(done)=>{
     request.post('/users/register')

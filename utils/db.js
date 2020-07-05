@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const conf = require('./conf');
+const conf = require('../config/conf');
 const isDev = process.env.npm_lifecycle_event === 'dev';
 const dbConf = isDev && conf.devDb || conf.proDb;
 const cls = require('continuation-local-storage'); //全局查询采用事务
