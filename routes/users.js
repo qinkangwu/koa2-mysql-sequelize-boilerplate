@@ -15,7 +15,6 @@ router.post('/register',async(ctx)=>{
   const user = ctx.request.body;
   user.id = uuid.v1();
   const res = await redis.hmset(user.id,"id",user.id,"username",user.username,"password",user.password);
-  console.log(res,'redis res +++++++++++++++');
   Users.create(user);
   result.success(ctx);
 });
