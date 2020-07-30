@@ -11,6 +11,19 @@ const redis = require('../utils/redis');
 let Users = model.User;
 router.prefix('/users')
 
+/**
+ * @api {get} /register 用户注册
+ * @apiName registerUser
+ * @apiGroup Users
+ *
+ * @apiParam {String} id 用户id
+ * @apiParam {String} username 用户名
+ * @apiParam {String} password 用户密码
+ *
+ * @apiSuccess {Number} code 1
+ * @apiSuccess {String} success 'true'
+ * @apiSuccess {Object} result {}
+ */
 router.post('/register',async(ctx)=>{
   const user = ctx.request.body;
   user.id = uuid.v1();
